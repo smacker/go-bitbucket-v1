@@ -6342,7 +6342,7 @@ Retrieve the repository matching the supplied &lt;strong&gt;projectKey&lt;/stron
 @param projectKey the parent project key
 @param repositorySlug the repository slug
 @return */
-func (a *DefaultApiService) GetPullRequestActivity(projectKey, repositorySlug string, pullRequestID int) (*APIResponse, error) {
+func (a *DefaultApiService) GetPullRequestActivity(projectKey, repositorySlug string, pullRequestID int, localVarOptionals map[string]interface{}) (*APIResponse, error) {
 	var (
 		localVarHTTPMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -6359,6 +6359,20 @@ func (a *DefaultApiService) GetPullRequestActivity(projectKey, repositorySlug st
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+
+	if err := typeCheckParameter(localVarOptionals["start"], "int", "start"); err != nil {
+		return nil, err
+	}
+	if err := typeCheckParameter(localVarOptionals["limit"], "int", "limit"); err != nil {
+		return nil, err
+	}
+
+	if localVarTempParam, localVarOk := localVarOptionals["start"].(int); localVarOk {
+		localVarQueryParams.Add("start", parameterToString(localVarTempParam, ""))
+	}
+	if localVarTempParam, localVarOk := localVarOptionals["limit"].(int); localVarOk {
+		localVarQueryParams.Add("limit", parameterToString(localVarTempParam, ""))
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
